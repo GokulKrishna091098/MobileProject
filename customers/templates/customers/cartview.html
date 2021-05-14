@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<title>My Orders</title>
+{%extends 'customers/base.html'%}
+{%block tmp %}
+
+
+{% if  carts  %}
+<br>
+<h3><b>MY CART</b></h3>
+<br>
+<table class="table table-white text-dark " border="2">
+    <thead class="thead-light">
+    <tr>
+        <td width="20%"><b>Image</b></td>
+        <td><b>Product</b></td>
+        <td><b>Price</b></td>
+        <td><b>Specificaton</b></td>
+        <td><b>Quantity</b></td>
+        <td><b>Total Price</b></td>
+        <td colspan="2"><b>Action</b></td>
+
+    </tr>
+    </thead>
+    {%for cart in carts%}
+    <tr>
+        <td >
+            <div class="image"><img src="{{cart.product.image.url}}" class="card-img-top" alt="..." style="object-fit: contain;" height="100px"></div>
+        </td>
+        <td>{{cart.product}}</td>
+        <td>{{cart.product.price}}</td>
+        <td>{{cart.product.specs}}</td>
+        <td>{{cart.quantity}}</td>
+        <td>Rs.<b>{{cart.price_total}}</b></td>
+        <td><a class="btn btn-danger btn-block" href="{%url 'remove' cart.id%}">Remove</a></td>
+        <td><a href="{%url 'placeorder' cart.id%}" class="btn btn-success btn-block">Place Order</a></td>
+    </tr>
+    {%endfor%}
+</table>
+<table class="table table-dark text-light">
+    <tr>
+        <td style="text-align:right;background-color:white;color:black;">Cart Total: <b>₹{{total.price_total__sum}}</b></td>
+    </tr>
+
+</table>
+{%else %}
+<h3>CART EMPTY!</h3>
+{% endif %}
+{%endblock%}

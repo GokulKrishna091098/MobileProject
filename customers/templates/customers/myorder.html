@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<title>My Orders</title>
+{%extends 'customers/base.html'%}
+{%block tmp%}
+<br>
+<h3><b>MY ORDERS</b></h3>
+<br>
+<table class="table table-white text-dark " border="2">
+    <tr>
+        <td width="20%"><b>Image</b></td>
+        <td><b>Product</b></td>
+        <td><b>Price</b></td>
+        <td><b>Specificaton</b></td>
+        <td><b>Status</b></td>
+        <td><b>Address</b></td>
+        <td colspan="2"><b>Action</b></td>
+    </tr>
+    {%for orders in order%}
+    <tr>
+        <td>
+            <div class="image"><img src="{{orders.product.image.url}}" class="card-img-top" alt="..." style="object-fit: contain;" height="100px"></div>
+        </td>
+        <td>{{orders.product}}</td>
+        <td>{{orders.product.price}}</td>
+        <td>{{orders.product.specs}}</td>
+        <td><b>{{orders.status}}</b></td>
+        <td>{{orders.address}}</td>
+        {%if not orders.status == "Cancelled" and  orders.status == "Shipped" and  orders.status == "Ordered"%}
+        <td><a class="btn btn-danger btn-block" href="{%url 'cancelorders' orders.id%}">Cancel Order</a></td>
+        {%else%}
+        <td>-</td>
+        <td></td>
+        {%endif%}
+    </tr>
+    {%endfor%}
+</table>
+{%endblock%}

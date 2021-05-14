@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import user_home,user_list_all_mobiles,user_login,user_logout,user_mobile_details,user_registration
+from .views import user_home,user_list_all_mobiles,user_login,user_logout,user_mobile_details,user_registration,add_to_cart,view_mycart,remove_cart_item,cart_order,user_list_all_orders,cancel_order
+
 
 urlpatterns = [
    path('home/',user_home,name="userhome"),
@@ -24,4 +25,10 @@ urlpatterns = [
    path('logout',user_logout,name="userlogout"),
    path('mobiledetails/<int:id>',user_mobile_details,name="usermobiledetails"),
    path('registration',user_registration,name="userregistration"),
+   path('addcart/<int:id>',add_to_cart,name='addcart'),
+   path('mycart',view_mycart,name='mycart'),
+   path('remove/<int:id>',remove_cart_item,name='remove'),
+   path('order/<int:id>',cart_order,name='placeorder'),
+   path('myorders/',user_list_all_orders,name='myorders'),
+   path('cancelorders/<int:id>',cancel_order,name='cancelorders'),
 ]
